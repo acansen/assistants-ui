@@ -77,7 +77,7 @@ const Chat = ({
   // create a new threadID when chat component created
   useEffect(() => {
     const createThread = async () => {
-      const res = await fetch(`/api/assistants/threads`, {
+      const res = await fetch(`/asst/api/assistants/threads`, {
         method: "POST",
       });
       const data = await res.json();
@@ -88,7 +88,7 @@ const Chat = ({
 
   const sendMessage = async (text) => {
     const response = await fetch(
-      `/api/assistants/threads/${threadId}/messages`,
+      `/asst/api/assistants/threads/${threadId}/messages`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -102,7 +102,7 @@ const Chat = ({
 
   const submitActionResult = async (runId, toolCallOutputs) => {
     const response = await fetch(
-      `/api/assistants/threads/${threadId}/actions`,
+      `/asst/api/assistants/threads/${threadId}/actions`,
       {
         method: "POST",
         headers: {
@@ -150,7 +150,7 @@ const Chat = ({
 
   // imageFileDone - show image in chat
   const handleImageFileDone = (image) => {
-    appendToLastMessage(`\n![${image.file_id}](/api/files/${image.file_id})\n`);
+    appendToLastMessage(`\n![${image.file_id}](/asst/api/files/${image.file_id})\n`);
   }
 
   // toolCallCreated - log new tool call
@@ -239,7 +239,7 @@ const Chat = ({
         if (annotation.type === 'file_path') {
           updatedLastMessage.text = updatedLastMessage.text.replaceAll(
             annotation.text,
-            `/api/files/${annotation.file_path.file_id}`
+            `/asst/api/files/${annotation.file_path.file_id}`
           );
         }
       })
@@ -265,14 +265,18 @@ const Chat = ({
           className={styles.input}
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
-          placeholder="Enter your question"
+          placeholder="Message ChatMB"
         />
         <button
           type="submit"
           className={styles.button}
           disabled={inputDisabled}
         >
-          Send
+          {inputDisabled ? (
+            <div className={styles.loading}></div>
+          ) : (
+            "Send"
+          )}
         </button>
       </form>
     </div>

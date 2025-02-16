@@ -11,7 +11,7 @@ const Warnings = () => {
   const fetchAssistantId = async () => {
     setLoading(true);
 
-    const response = await fetch("/api/assistants", { method: "POST" });
+    const response = await fetch("/asst/api/assistants", { method: "POST" });
     const data = await response.json();
     setNewAssistantId(data.assistantId);
 

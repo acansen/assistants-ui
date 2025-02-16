@@ -18,7 +18,7 @@ const Home = () => {
       </div>
       <div className={styles.container}>
         {Object.entries(categories).map(([name, url]) => (
-          <a key={name} className={styles.category} href={`/examples/${url}`}>
+          <a key={name} className={styles.category} href={`/asst/examples/${url}`}>
             {name}
           </a>
         ))}
