@@ -62,6 +62,8 @@ const Chat = ({
 }: ChatProps) => {
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState([]);
+  
+  
   const [inputDisabled, setInputDisabled] = useState(false);
   const [threadId, setThreadId] = useState("");
 
@@ -84,6 +86,12 @@ const Chat = ({
       setThreadId(data.threadId);
     };
     createThread();
+    setMessages((prevMessages) => [
+      {role: "assistant", text: `Hi there! I’m Mimi 
+  Your little AI cat friend — I can talk, giggle, act cute, and even send you a kiss!
+  Wanna chat with me? Just say hi, or ask me anything!
+  (Psst... I have tons of expressions too! Let’s have some fun )`},
+    ]);
   }, []);
 
   const sendMessage = async (text) => {
@@ -265,7 +273,7 @@ const Chat = ({
           className={styles.input}
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
-          placeholder="Message ChatMB"
+          placeholder="Message Chat"
         />
         <button
           type="submit"
